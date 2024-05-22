@@ -101,7 +101,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         </div>
       </main>
       <footer className="p-6 text-center text-white/80 sm:p-12">
-        Site is modified by
+        Site is modified by{" "}
         <a
           href="https://github.com/CLCK0622"
           target="_blank"
@@ -110,7 +110,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         >
           Kevin Zhong
         </a>
-        .{" Photos are mainly shot by"}
+        .{" Photos are mainly shot by "}
         <a
           href=""
           target="_blank"
@@ -119,7 +119,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         >
           2512cr
         </a>
-        . Thanks to 2512 for all the pictures and happy memories.
+        .{"\n"} Thanks to 2512 for all the pictures and happy memories.{"\n"}
         All made with ❤. Copyright © 2024-
       </footer>
     </>
