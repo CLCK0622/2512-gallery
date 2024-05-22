@@ -113,7 +113,10 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         >
           2512cr
         </a>
-        .{"\n"} Thanks to 2512 for all the pictures and happy memories.{"\n"}
+        .
+        <br />
+        Thanks to 2512 for all the pictures and happy memories.
+        <br />
         All made with ❤. Copyright © 2024-
       </footer>
     </>
