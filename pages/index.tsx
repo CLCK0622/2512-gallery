@@ -30,7 +30,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   return (
     <>
       <Head>
-        <title>Next.js Conf 2022 Photos</title>
+        <title>2512 Album</title>
         <meta
           property="og:image"
           content="https://nextjsconf-pics.vercel.app/og-image.png"
@@ -57,21 +57,20 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
               </span>
               <span className="absolute left-0 right-0 bottom-0 h-[400px] bg-gradient-to-b from-black/0 via-black to-black"></span>
             </div>
-            <Logo />
-            <h1 className="mt-8 mb-4 text-base font-bold uppercase tracking-widest">
-              2022 Event Photos
+            {/* <Logo /> */}
+            <h1 className="mt-8 mb-4 text-3xl font-bold uppercase tracking-widest">
+              2512 Album
             </h1>
             <p className="max-w-[40ch] text-white/75 sm:max-w-[32ch]">
-              Our incredible Next.js community got together in San Francisco for
-              our first ever in-person conference!
+              Welcome to EFZ-GKB 2512!
             </p>
             <a
               className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4"
-              href="https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-cloudinary&project-name=nextjs-image-gallery&repository-name=with-cloudinary&env=NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,CLOUDINARY_API_KEY,CLOUDINARY_API_SECRET,CLOUDINARY_FOLDER&envDescription=API%20Keys%20from%20Cloudinary%20needed%20to%20run%20this%20application"
+              href=""
               target="_blank"
               rel="noreferrer"
             >
-              Clone and Deploy
+              Homepage(WIP)
             </a>
           </div>
           {images.map(({ id, public_id, format, blurDataUrl }) => (
@@ -103,34 +102,36 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         </div>
       </main>
       <footer className="p-6 text-center text-white/80 sm:p-12">
-        Thank you to{" "}
+        Site made by{' '}
         <a
-          href="https://edelsonphotography.com/"
+          href="https://github.com/CLCK0622"
           target="_blank"
           className="font-semibold hover:text-white"
           rel="noreferrer"
         >
-          Josh Edelson
+          Kevin Zhong
         </a>
-        ,{" "}
+        . Photos organized by{' '}
         <a
-          href="https://www.newrevmedia.com/"
+          href="https://www.instagram.com/crhappyforever/"
           target="_blank"
           className="font-semibold hover:text-white"
           rel="noreferrer"
         >
-          Jenny Morgan
+          crhappyforever
         </a>
-        , and{" "}
+        . <br />Thanks to{' '}
         <a
-          href="https://www.garysextonphotography.com/"
+          href=""
           target="_blank"
           className="font-semibold hover:text-white"
           rel="noreferrer"
         >
-          Gary Sexton
-        </a>{" "}
-        for the pictures.
+          2512
+        </a>{' '}
+        for all the pictures and the happy memories.
+        <br />
+        All made with ❤️. Copyright ©️ 2023 - 2024.
       </footer>
     </>
   );
