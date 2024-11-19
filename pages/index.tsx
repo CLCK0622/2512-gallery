@@ -7,7 +7,7 @@ import { lazy, useEffect, useRef } from "react";
 import Bridge from "../components/Icons/Bridge";
 import Modal from "../components/Modal";
 import cloudinary from "../utils/cloudinary";
-import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
+// import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
 import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
 import tags from "../tags.json";
@@ -100,8 +100,8 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                         <Image
                           alt="Album photo"
                           className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                          placeholder="blur"
-                          blurDataURL={blurDataUrl}
+                        //   placeholder="blur"
+                        //   blurDataURL={blurDataUrl}
                           src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                           width={720}
                           height={480}
@@ -136,8 +136,8 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                     <Image
                       alt="Album photo"
                       className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                      placeholder="blur"
-                      blurDataURL={blurDataUrl}
+                    //   placeholder="blur"
+                    //   blurDataURL={blurDataUrl}
                       src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                       width={180}
                       height={120}

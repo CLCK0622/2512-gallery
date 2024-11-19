@@ -2,7 +2,7 @@ import pLimit from "p-limit";
 import cloudinary from "./cloudinary";
 
 import tags from "../tags.json";
-import getBase64ImageUrl from "./generateBlurPlaceholder";
+// import getBase64ImageUrl from "./generateBlurPlaceholder";
 import { ImageProps } from "./types";
 
 export async function getResults() {
@@ -32,15 +32,15 @@ export async function getResults() {
 
   const limit = pLimit(5);
 
-  const blurImagePromises = reducedResults.map((image) =>
-    limit(() => getBase64ImageUrl(image))
-  );
+//   const blurImagePromises = reducedResults.map((image) =>
+//     limit(() => getBase64ImageUrl(image))
+//   );
 
-  const imagesWithBlurDataUrls = await Promise.all(blurImagePromises);
+//   const imagesWithBlurDataUrls = await Promise.all(blurImagePromises);
 
-  for (let i = 0; i < reducedResults.length; i++) {
-    reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i];
-  }
+//   for (let i = 0; i < reducedResults.length; i++) {
+//     reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i];
+//   }
 
   const categorizedImages = {};
   const untaggedImages = [];
