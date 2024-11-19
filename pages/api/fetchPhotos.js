@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
       .with_field("tags")
       .sort_by("public_id", "desc")
-      .max_results(100)
+      .max_results(500)
       .execute();
 
     const resources = result.resources;
