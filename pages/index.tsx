@@ -119,7 +119,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
           )}
 
           <div className="mb-12">
-            <h2 className="mb-4 text-xl font-semibold text-white">Untagged</h2>
+            <h2 className="mb-4 text-xl font-semibold text-white">未分类</h2>
             <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
               {(untaggedImages || []).map(
                 ({ id, public_id, format, blurDataUrl }: ImageProps) => (
