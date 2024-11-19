@@ -79,7 +79,9 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
           {Object.entries(categorizedImages || {}).map(
             ([tag, images]: [string, any]) => (
               <div key={tag} className="mb-12">
-                <h2 className="mb-4 text-xl font-semibold">{tags[tag]}</h2>
+                <h2 className="mb-4 text-xl font-semibold text-white">
+                  {tags[tag]}
+                </h2>
                 <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
                   {images.map(
                     ({ id, public_id, format, blurDataUrl }: ImageProps) => (
@@ -100,13 +102,13 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                           className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
                           placeholder="blur"
                           blurDataURL={blurDataUrl}
-                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}?invalidate=true`}
                           width={720}
                           height={480}
                           sizes="(max-width: 640px) 100vw,
-                      (max-width: 1280px) 50vw,
-                      (max-width: 1536px) 33vw,
-                      25vw"
+                          (max-width: 1280px) 50vw,
+                          (max-width: 1536px) 33vw,
+                          25vw"
                         />
                       </Link>
                     )
@@ -136,7 +138,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                       className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
                       placeholder="blur"
                       blurDataURL={blurDataUrl}
-                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}?invalidate=true`}
                       width={720}
                       height={480}
                       sizes="(max-width: 640px) 100vw,
@@ -191,12 +193,12 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
 export default Home;
 
 export async function getStaticProps() {
-    const { props } = await getResults();
+  const { props } = await getResults();
 
-    return {
-      props: {
-        categorizedImages: props.categorizedImages || {},
-        untaggedImages: props.untaggedImages || [],
-      },
-    };
+  return {
+    props: {
+      categorizedImages: props.categorizedImages || {},
+      untaggedImages: props.untaggedImages || [],
+    },
+  };
 }

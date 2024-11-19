@@ -5,11 +5,16 @@ import getBase64ImageUrl from "./generateBlurPlaceholder";
 import { ImageProps } from "./types";
 
 export async function getResults() {
+   cloudinary.v2.api.resources({ type: "upload", max_results: 1000 });
+
   const results = await cloudinary.v2.search
     .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
+    .with_field("tags")
     .sort_by("public_id", "desc")
     .max_results(400)
     .execute();
+
+    // console.log(results);
 
   let reducedResults: ImageProps[] = [];
   let i = 0;
@@ -51,8 +56,8 @@ export async function getResults() {
     }
   });
 
-  console.log("categorizedImages:", categorizedImages);
-  console.log("untaggedImages:", untaggedImages);
+//   console.log("categorizedImages:", categorizedImages);
+//   console.log("untaggedImages:", untaggedImages);
 
   return {
     props: {
