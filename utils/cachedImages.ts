@@ -1,3 +1,4 @@
+import pLimit from "p-limit";
 import cloudinary from "./cloudinary";
 
 import tags from "../tags.json";
@@ -5,7 +6,7 @@ import getBase64ImageUrl from "./generateBlurPlaceholder";
 import { ImageProps } from "./types";
 
 export async function getResults() {
-   cloudinary.v2.api.resources({ type: "upload", max_results: 1000 });
+  cloudinary.v2.api.resources({ type: "upload", max_results: 1000 });
 
   const results = await cloudinary.v2.search
     .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
@@ -13,8 +14,6 @@ export async function getResults() {
     .sort_by("public_id", "desc")
     .max_results(400)
     .execute();
-
-    // console.log(results);
 
   let reducedResults: ImageProps[] = [];
   let i = 0;
@@ -31,9 +30,12 @@ export async function getResults() {
     i++;
   }
 
-  const blurImagePromises = reducedResults.map((image) => {
-    return getBase64ImageUrl(image);
-  });
+  const limit = pLimit(5);
+
+  const blurImagePromises = reducedResults.map((image) =>
+    limit(() => getBase64ImageUrl(image))
+  );
+
   const imagesWithBlurDataUrls = await Promise.all(blurImagePromises);
 
   for (let i = 0; i < reducedResults.length; i++) {
@@ -55,9 +57,6 @@ export async function getResults() {
       untaggedImages.push(image);
     }
   });
-
-//   console.log("categorizedImages:", categorizedImages);
-//   console.log("untaggedImages:", untaggedImages);
 
   return {
     props: {
