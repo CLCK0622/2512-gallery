@@ -2,12 +2,17 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Carousel from "../../components/Carousel";
-import getResults from "../../utils/cachedImages";
-import cloudinary from "../../utils/cloudinary";
-import getBase64ImageUrl from "../../utils/generateBlurPlaceholder";
-import type { ImageProps } from "../../utils/types";
+import {getResults} from "../../utils/cachedImages";
+import tags from "../../tags.json";
+import { ImageProps } from "../../utils/types";
 
-const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
+const PhotoPage: NextPage = ({
+  currentPhoto,
+  tagName,
+}: {
+  currentPhoto: ImageProps;
+  tagName: string;
+}) => {
   const router = useRouter();
   const { photoId } = router.query;
   let index = Number(photoId);
@@ -17,58 +22,64 @@ const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
   return (
     <>
       <Head>
-        <title>2512 Album</title>
+        <title>{tags[tagName] || "Untagged"} - 2512 Album</title>
         <meta property="og:image" content={currentPhotoUrl} />
         <meta name="twitter:image" content={currentPhotoUrl} />
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
+        <h1 className="mb-4 text-2xl font-bold">
+          {tags[tagName] || "Untagged"}
+        </h1>
         <Carousel currentPhoto={currentPhoto} index={index} />
       </main>
     </>
   );
 };
 
-export default Home;
+export default PhotoPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const results = await getResults();
+  const { props } = await getResults();
+  const { categorizedImages, untaggedImages } = props;
 
-  let reducedResults: ImageProps[] = [];
-  let i = 0;
-  for (let result of results.resources) {
-    reducedResults.push({
-      id: i,
-      height: result.height,
-      width: result.width,
-      public_id: result.public_id,
-      format: result.format,
-    });
-    i++;
+  const photoId = Number(context.params.photoId);
+
+  const allImages = [
+    ...Object.values(categorizedImages).flat(),
+    ...untaggedImages,
+  ];
+
+  const currentPhoto = allImages.find((img) => img.id === photoId);
+
+  if (!currentPhoto) {
+    return { notFound: true };
   }
 
-  const currentPhoto = reducedResults.find(
-    (img) => img.id === Number(context.params.photoId),
-  );
-  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
+  const tagName = currentPhoto.tags.length > 0 ? currentPhoto.tags[0] : "untagged";
 
   return {
     props: {
-      currentPhoto: currentPhoto,
+      currentPhoto,
+      tagName,
     },
   };
 };
 
 export async function getStaticPaths() {
-  const results = await cloudinary.v2.search
-    .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-    .sort_by("public_id", "desc")
-    .max_results(400)
-    .execute();
+  const { props } = await getResults();
+  const { categorizedImages, untaggedImages } = props;
 
   let fullPaths = [];
-  for (let i = 0; i < results.resources.length; i++) {
-    fullPaths.push({ params: { photoId: i.toString() } });
+
+  for (const [tag, images] of Object.entries(categorizedImages) as [string, ImageProps[]][]) {
+    images.forEach((image: ImageProps) => {
+      fullPaths.push({ params: { photoId: image.id.toString() } });
+    });
   }
+
+  untaggedImages.forEach((image: ImageProps) => {
+    fullPaths.push({ params: { photoId: image.id.toString() } });
+  });
 
   return {
     paths: fullPaths,
