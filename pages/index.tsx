@@ -84,7 +84,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                 </h2>
                 <div className="gap-4 columns-1 sm:columns-2 lg:columns-6">
                   {images.map(
-                    ({ id, public_id, format, blurDataUrl }: ImageProps) => (
+                    ({ id, public_id, format }: ImageProps) => (
                       <Link
                         key={id}
                         href={`/?photoId=${public_id}`}
@@ -124,7 +124,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
             <h2 className="mb-4 text-xl font-semibold text-white">未分类</h2>
             <div className="gap-4">
               {(untaggedImages || []).map(
-                ({ id, public_id, format, blurDataUrl }: ImageProps) => (
+                ({ id, public_id, format }: ImageProps) => (
                   <Link
                     key={id}
                     href={`/?photoId=${public_id}`}

@@ -6,7 +6,7 @@ import tags from "../tags.json";
 import { ImageProps } from "./types";
 
 export async function getResults() {
-  cloudinary.v2.api.resources({ type: "upload", max_results: 1000 });
+//   cloudinary.v2.api.resources({ type: "upload", max_results: 1000 });
 
   const results = await cloudinary.v2.search
     .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
