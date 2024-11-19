@@ -20,7 +20,7 @@ export async function getResults() {
 
   for (let result of results.resources) {
     reducedResults.push({
-      id: i,
+      id: result.public_id,
       height: result.height,
       width: result.width,
       public_id: result.public_id,

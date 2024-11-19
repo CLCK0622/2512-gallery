@@ -87,8 +87,8 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                     ({ id, public_id, format, blurDataUrl }: ImageProps) => (
                       <Link
                         key={id}
-                        href={`/?photoId=${id}`}
-                        as={`/p/${id}`}
+                        href={`/?photoId=${public_id}`}
+                        as={`/p/${public_id}`}
                         ref={
                           id === Number(lastViewedPhoto)
                             ? lastViewedPhotoRef
@@ -127,8 +127,8 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                 ({ id, public_id, format, blurDataUrl }: ImageProps) => (
                   <Link
                     key={id}
-                    href={`/?photoId=${id}`}
-                    as={`/p/${id}`}
+                    href={`/?photoId=${public_id}`}
+                    as={`/p/${public_id}`}
                     ref={
                       id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null
                     }

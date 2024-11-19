@@ -42,14 +42,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { props } = await getResults();
   const { categorizedImages, untaggedImages } = props;
 
-  const photoId = Number(context.params.photoId);
-
   const allImages = [
     ...Object.values(categorizedImages).flat(),
     ...untaggedImages,
   ];
 
-  const currentPhoto = allImages.find((img) => img.id === photoId);
+  const photoId = context.params.photoId;
+  const currentPhoto = allImages.find((img) => img.public_id === photoId);  
 
   if (!currentPhoto) {
     return { notFound: true };
@@ -73,12 +72,12 @@ export async function getStaticPaths() {
 
   for (const [tag, images] of Object.entries(categorizedImages) as [string, ImageProps[]][]) {
     images.forEach((image: ImageProps) => {
-      fullPaths.push({ params: { photoId: image.id.toString() } });
+      fullPaths.push({ params: { photoId: image.public_id } });
     });
   }
 
   untaggedImages.forEach((image: ImageProps) => {
-    fullPaths.push({ params: { photoId: image.id.toString() } });
+    fullPaths.push({ params: { photoId: image.public_id } });
   });
 
   return {
