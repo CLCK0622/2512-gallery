@@ -1,0 +1,38 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#title-section {
+  height: 100vh;
+  display: grid;
+  align-items: end;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  background-image: url("/img/cover.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#content-section {
+    padding: 10px;
+}
+
+footer {
+    justify-self: center;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    line-height: 1.5rem;
+}
+
+.material-symbols-outlined {
+    justify-self: center;
+    font-size: 36px;
+}

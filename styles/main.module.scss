@@ -1,0 +1,33 @@
+.container {
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.tagGroup {
+}
+
+.tag {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.imageGrid {
+    width: 100%;
+}
+
+.image {
+  width: 100%;
+  max-width: 100px;
+  border-radius: 4px;
+  margin: 5px;
+  transition: transform 0.2s;
+}
+
+.image:hover {
+  transform: scale(1.25);
+  filter: drop-shadow(rgb(0, 0, 0) 0px 0px 5px);
+}
