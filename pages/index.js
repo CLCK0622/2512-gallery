@@ -44,7 +44,7 @@ export default function Home() {
                                         <img
                                             src={image.thumbnail_url}
                                             alt={image.public_id}
-                                            loading={"lazy"}
+                                            loading="lazy"
                                             className={styles.image}
                                         />
                                     </a>
