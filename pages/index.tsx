@@ -100,8 +100,10 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                         <Image
                           alt="Album photo"
                           className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                        //   placeholder="blur"
-                        //   blurDataURL={blurDataUrl}
+                          placeholder="blur"
+                          blurDataURL={
+                            "https://placehold.co/600x400?text=Hello+World"
+                          }
                           src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                           width={720}
                           height={480}
@@ -136,8 +138,10 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                     <Image
                       alt="Album photo"
                       className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                    //   placeholder="blur"
-                    //   blurDataURL={blurDataUrl}
+                      placeholder="blur"
+                      blurDataURL={
+                        "https://placehold.co/600x400?text=Hello+World"
+                      }
                       src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                       width={180}
                       height={120}
