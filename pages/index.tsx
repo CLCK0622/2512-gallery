@@ -52,7 +52,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
             }}
           />
         )}
-        <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
+        <div className="gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
           <div className="after:content relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-white/10 px-6 pb-16 pt-64 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
             <div className="absolute inset-0 flex items-center justify-center opacity-20">
               <span className="flex max-h-full max-w-full items-center justify-center">
@@ -82,7 +82,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                 <h2 className="mb-4 text-xl font-semibold text-white">
                   {tags[tag]}
                 </h2>
-                <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
+                <div className="gap-4">
                   {images.map(
                     ({ id, public_id, format, blurDataUrl }: ImageProps) => (
                       <Link
@@ -102,9 +102,10 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                           className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
                           placeholder="blur"
                           blurDataURL={blurDataUrl}
-                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}?invalidate=true`}
+                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                           width={720}
                           height={480}
+                          loading="lazy"
                           sizes="(max-width: 640px) 100vw,
                           (max-width: 1280px) 50vw,
                           (max-width: 1536px) 33vw,
@@ -120,7 +121,7 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
 
           <div className="mb-12">
             <h2 className="mb-4 text-xl font-semibold text-white">未分类</h2>
-            <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
+            <div className="gap-4">
               {(untaggedImages || []).map(
                 ({ id, public_id, format, blurDataUrl }: ImageProps) => (
                   <Link
@@ -138,9 +139,10 @@ const Home: NextPage = ({ categorizedImages, untaggedImages }: any) => {
                       className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
                       placeholder="blur"
                       blurDataURL={blurDataUrl}
-                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}?invalidate=true`}
+                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                       width={720}
                       height={480}
+                      loading="lazy"
                       sizes="(max-width: 640px) 100vw,
                       (max-width: 1280px) 50vw,
                       (max-width: 1536px) 33vw,
