@@ -1,56 +1,60 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import tagName from "../tags.json";
 import styles from "../styles/main.module.scss";
-import tags from "../tags.json"
-import Head from "next/head";
 
 export default function Home() {
-    const [photos, setPhotos] = useState({});
+    const [tags, setTags] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     useEffect(() => {
-        const fetchPhotos = async () => {
-            try {
-                const res = await fetch("./api/fetchPhotos");
+        const fetchData = async () => {
+            const cachedData = localStorage.getItem("photoData");
+            if (cachedData) {
+                const parsedData = JSON.parse(cachedData);
+                setTags(Object.keys(parsedData));
+            } else {
+                const res = await fetch("/api/fetchPhotos");
                 const data = await res.json();
-                setPhotos(data);
-            } catch (error) {
-                console.error("Failed to fetch photos", error);
+                localStorage.setItem("photoData", JSON.stringify(data));
+                setTags(Object.keys(data));
             }
+            setLoading(false);
         };
-        fetchPhotos();
+
+        fetchData();
+
+        const clearLocalStorage = () => {
+            localStorage.removeItem("photoData");
+        };
+
+        window.addEventListener("beforeunload", clearLocalStorage);
+
+        return () => {
+            window.removeEventListener("beforeunload", clearLocalStorage);
+        };
     }, []);
 
     return (
         <>
-            <Head><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=keyboard_arrow_down" /></Head>
             <div className={styles.container}>
                 <section id="title-section">
                     <div className={styles.title}>2512 Album</div>
-                    <div class="material-symbols-outlined">
+                    <div className={"material-symbols-outlined"}>
                         keyboard_arrow_down
                     </div>
                 </section>
                 <section id="content-section">
-                    {Object.entries(photos).map(([tag, images]) => (
-                        <div key={tag} className={styles.tagGroup}>
-                            <h2 className={styles.tag}>{tags[tag]}</h2>
-                            <div className={styles.imageGrid}>
-                                {(Array.isArray(images) ? images : []).map((image) => (
-                                    <a
-                                        key={image.public_id}
-                                        href={image.original_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <img
-                                            src={image.thumbnail_url}
-                                            alt={image.public_id}
-                                            loading="lazy"
-                                            className={styles.image}
-                                        />
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
+                    <h1>{loading ? "Loading..." : "Events"}</h1>
+                    {tags.map((tag) => (
+                        <p
+                            className={styles.tagList}
+                            key={tag}
+                        >
+                            <span
+                                onClick={() => router.push(`/tag/${tag}`)}>{tagName[tag] || tag}</span>
+                        </p>
                     ))}
                 </section>
             </div>
@@ -85,7 +89,7 @@ export default function Home() {
                 </a>{" "}
                 for all the pictures and the happy memories.
                 <br />
-                All made with ❤️. Copyright ©️ 2023 - 2024.
+                All made with ❤️. Copyright &copy; 2023 - 2024.
             </footer>
         </>
     );

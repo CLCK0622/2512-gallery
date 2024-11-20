@@ -1,10 +1,33 @@
+html {
+  scroll-behavior: smooth !important;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   height: 100%;
   overflow-x: hidden;
+  font-family: "Noto Sans", "Noto Sans SC", sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+button {
+    font-family: 'Noto Sans', sans-serif;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: silver;
+    border-width: 1.5px;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px);
 }
 
 #title-section {
@@ -18,21 +41,41 @@ body {
   background-image: url("/img/cover.png");
   background-repeat: no-repeat;
   background-size: cover;
+  opacity: 75%;
+  filter: drop-shadow(rgb(0, 0, 0) 0px 0px 5px);
+}
+
+#tags-section {
+  height: 20vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  background-image: url("/img/cover.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 75%;
+  filter: drop-shadow(rgb(0, 0, 0) 0px 0px 5px);
 }
 
 #content-section {
-    padding: 10px;
+  padding: 10px;
+  text-align: center;
 }
 
 footer {
-    justify-self: center;
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
-    line-height: 1.5rem;
+  justify-self: center;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  line-height: 1.5rem;
+  font-family: "Noto Serif", serif;
 }
 
 .material-symbols-outlined {
-    justify-self: center;
-    font-size: 36px;
+  justify-self: center;
+  font-size: 48px;
+  filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px);
 }

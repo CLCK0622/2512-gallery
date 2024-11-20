@@ -10,4 +10,8 @@ module.exports = {
       },
     ],
   },
+  sassOptions: {
+    quietDeps: true,
+    silenceDeprecations: ['legacy-js-api'],
+  },
 };
