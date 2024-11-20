@@ -47,7 +47,7 @@ export default function TagPage() {
                     {photos
                         .slice(0, (page + 1) * photosPerPage)
                         .map((photo, index) => (
-                            <a href={photo.original_url} target="_blank">
+                            <a href={photo.original_url} target="_blank" key={index}>
                                 <img
                                     className={styles.image}
                                     key={index}
